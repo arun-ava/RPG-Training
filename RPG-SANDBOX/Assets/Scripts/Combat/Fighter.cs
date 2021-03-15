@@ -1,9 +1,9 @@
 using UnityEngine;
 using RPG.Movement;
-
+using RPG.Core;
 namespace RPG.Combat 
 {
-    public class Fighter : MonoBehaviour
+    public class Fighter : MonoBehaviour, IAction
     {
         [SerializeField] float weaponRange = 2.0f;
         Transform target;
@@ -15,34 +15,41 @@ namespace RPG.Combat
         }
         private void Update()
         {
-            MoveToTarget();
+            if(target == null) return;
+            if(!IsInWeaponRange())
+            {
+                MoveToTarget();
+            }
+            else
+            {
+                GetComponent<Mover>().Stop();
+            }
         }
         
         public void Attack(Transform target)
         {
             this.target = target;
+            GetComponent<ActionScheduler>().StartAction(this);
         }
 
-        public void Stop()
+        public bool IsFighting()
         {
-            // Debug.Log("Stopped");
+            return target != null;
+        }
+
+        public void Cancel()
+        {
             this.target = null;
-            this.mover.Stop();
         }
 
         private void MoveToTarget()
         {
-            if(target == null) return;
-            
-            bool isInWeaponRange = Vector3.Distance(target.position, transform.position) < weaponRange;
-            
-            if(target != null && !isInWeaponRange)
-            {
-                mover.MoveTo(target.position);
-            } else 
-            {
-                mover.Stop();
-            }
+            mover.MoveTo(target.position);
+        }
+
+        private bool IsInWeaponRange()
+        {
+            return Vector3.Distance(target.position, transform.position) <= weaponRange;
         }
         
     }

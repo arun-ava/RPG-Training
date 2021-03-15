@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
-
+using RPG.Core;
 namespace RPG.Movement 
 {
-    public class Mover : MonoBehaviour
+    public class Mover : MonoBehaviour, IAction
     {
         [SerializeField] Transform target;
-
         private NavMeshAgent Agent;
         
         // Start is called before the first frame update
@@ -21,13 +20,20 @@ namespace RPG.Movement
             Agent.isStopped = true;
         }
 
-
-
         // Update is called once per frame
         void Update()
         {
             UpdateAnimator();
         }
+
+        public bool StartMoveAction(Vector3 destination)
+        {
+            GetComponent<ActionScheduler>().StartAction(this);
+            return MoveTo(destination);
+        }
+
+        public void Cancel()
+        {}
 
         public bool MoveTo(Vector3 destination)
         {
@@ -36,6 +42,7 @@ namespace RPG.Movement
             if(hasPath)
             {
                 Agent.SetPath(travelPath);
+                Agent.isStopped = false;
                 return true;
             }
             return false;

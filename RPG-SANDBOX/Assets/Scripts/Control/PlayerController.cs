@@ -7,7 +7,6 @@ namespace RPG.Control
 {
     public class PlayerController : MonoBehaviour
     {
-        private Fighter fightingWith;
         // Start is called before the first frame update
         void Start()
         {
@@ -16,8 +15,14 @@ namespace RPG.Control
         // Update is called once per frame
         void Update()
         {
-            if(InteractWithCombat()) return;
-            if(InteractWithMovement()) return;
+            if(InteractWithCombat())
+            { 
+                return;
+            }
+            if(InteractWithMovement())
+            {
+                return;
+            }
         }
 
         private Boolean InteractWithCombat()
@@ -30,8 +35,7 @@ namespace RPG.Control
 
                 if(Input.GetMouseButtonDown(0))
                 {
-                    fightingWith = GetComponent<Fighter>();
-                    fightingWith.Attack(target.transform);
+                    GetComponent<Fighter>().Attack(target.transform);
                 }
                 return true;
             }
@@ -43,6 +47,11 @@ namespace RPG.Control
             bool canMoveTo = false;
             if(Input.GetMouseButton(0))
             {
+                // // Cancel if attacking someone
+                // if(GetComponent<Fighter>().IsFighting())
+                // {
+                //     GetComponent<Fighter>().Cancel();
+                // }
                 canMoveTo = MoveToCursor();
             }
             return canMoveTo;
@@ -56,7 +65,7 @@ namespace RPG.Control
 
             if (hasHit)
             {
-                canMoveTo = GetComponent<Mover>().MoveTo(rayInfo.point);
+                canMoveTo = GetComponent<Mover>().StartMoveAction(rayInfo.point);
             }
             return canMoveTo;
 
