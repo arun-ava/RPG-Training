@@ -7,22 +7,22 @@ namespace RPG.Combat
     {
         [SerializeField] float weaponRange = 2.0f;
         Transform target;
-        Mover mover;
+        Traversal traversal;
 
         private void Start()
         {
-            mover = GetComponent<Mover>();
         }
+        
         private void Update()
         {
             if(target == null) return;
-            if(!IsInWeaponRange())
+            if(!_IsInWeaponRange())
             {
-                MoveToTarget();
+                _MoveToTarget();
             }
             else
             {
-                GetComponent<Mover>().Stop();
+                _GetTraversal().Stop();
             }
         }
         
@@ -42,14 +42,21 @@ namespace RPG.Combat
             this.target = null;
         }
 
-        private void MoveToTarget()
+        private void _MoveToTarget()
         {
-            mover.MoveTo(target.position);
+            // TODO: Check why this is getting null reference
+            // traversal.MoveTo(target.position);
+            _GetTraversal().MoveTo(target.position);
         }
 
-        private bool IsInWeaponRange()
+        private bool _IsInWeaponRange()
         {
             return Vector3.Distance(target.position, transform.position) <= weaponRange;
+        }
+
+        private Traversal _GetTraversal()
+        {
+            return GetComponent<Traversal>();
         }
         
     }
