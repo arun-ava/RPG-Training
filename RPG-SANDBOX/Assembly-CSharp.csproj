@@ -56,11 +56,22 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Combat\CombatTarget.cs" />
+     <Compile Include="Assets\Scripts\Combat\Death.cs" />
      <Compile Include="Assets\Scripts\Combat\Fighter.cs" />
+     <Compile Include="Assets\Scripts\Combat\Health.cs" />
      <Compile Include="Assets\Scripts\Control\PlayerController.cs" />
+     <Compile Include="Assets\Scripts\Control\PlayerController2.cs" />
+     <Compile Include="Assets\Scripts\Core\ActionScheduler.cs" />
      <Compile Include="Assets\Scripts\Core\FollowCamera.cs" />
+     <Compile Include="Assets\Scripts\Core\IAction.cs" />
+     <Compile Include="Assets\Scripts\Core\Traversal.cs" />
+     <Compile Include="Assets\Scripts\Core\Triggers.cs" />
+     <Compile Include="Assets\Scripts\Movement\KeyMover.cs" />
      <Compile Include="Assets\Scripts\Movement\Mover.cs" />
+     <Compile Include="Assets\Scripts\Powers\Invisibility.cs" />
+     <Compile Include="Assets\Scripts\Powers\SuperSpeed.cs" />
      <None Include="Assets\Asset Packs\Synty - Polygon Student Sample\README - Usage Rights for these assets.txt" />
+     <None Include="Assets\Asset Packs\Animations by Explosive\README - Usage Rights for these assets 1.txt" />
  <Reference Include="UnityEngine">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.21f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
  </Reference>
@@ -595,6 +606,10 @@
       <Project>{37BE6DD2-8B4E-3FDD-5F02-88D81E85175D}</Project>
       <Name>Unity.Timeline.Editor</Name>
     </ProjectReference>
+    <ProjectReference Include="Cinemachine.csproj">
+      <Project>{3FA4046C-3B67-2C5A-BD74-94B1025B4D8C}</Project>
+      <Name>Cinemachine</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.VSCode.Editor.csproj">
       <Project>{E8250D3C-36E5-023E-03BC-B11E3234E7D8}</Project>
       <Name>Unity.VSCode.Editor</Name>
@@ -618,6 +633,10 @@
     <ProjectReference Include="Unity.Rider.Editor.csproj">
       <Project>{51D5F9A0-D018-0EFF-CF93-8F580D24288C}</Project>
       <Name>Unity.Rider.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="com.unity.cinemachine.editor.csproj">
+      <Project>{4695E10E-CFD7-0D2A-E89A-63CC73746DE0}</Project>
+      <Name>com.unity.cinemachine.editor</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.TextMeshPro.csproj">
       <Project>{181DD22E-F480-4A24-F488-7F1EE4739D53}</Project>

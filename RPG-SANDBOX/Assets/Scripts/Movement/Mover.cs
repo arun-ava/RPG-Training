@@ -15,12 +15,12 @@ namespace RPG.Movement
         public bool StartMoveAction(Vector3 destination)
         {
             GetComponent<ActionScheduler>().StartAction(this);
-            return _GetTraversal().MoveTo(destination);
+            return _GetTraversal().moveTo(destination);
         }
 
         public void Cancel()
         {
-            _GetTraversal().Stop();
+            _GetTraversal().stop();
         }
 
         private Traversal _GetTraversal()
